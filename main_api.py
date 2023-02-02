@@ -19,7 +19,7 @@ import uuid
 rdscli.connect('facedetected')
 
 # Initializing Flask App Service
-app = Flask(__name__)
+app = Flask("application")
 
 #for swagger
 app.config["PROPAGATE_EXCEPTIONS"] = True
