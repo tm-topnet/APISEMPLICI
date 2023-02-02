@@ -1,0 +1,4 @@
+paho-mqtt==1.6.1
+redis
+flask
+flask_smorest
