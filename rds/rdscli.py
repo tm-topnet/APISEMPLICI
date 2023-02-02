@@ -7,15 +7,12 @@ import logging
 import pickle
 import json
 
-config_object = ConfigParser()
-config_object.read("fromWFtoJET-config.ini")
-redis_info = config_object["REDIS"]
-redis_host = redis_info["host"]
-redis_port = int(redis_info["port"])
-redis_db = int(redis_info["db"])
-redis_socket_keepalive = eval(redis_info["socket_keepalive"])
-redis_retry_on_timeout = eval(redis_info["retry_on_timeout"])
-redis_health_check_interval = int(redis_info["health_check_interval"])
+redis_host = "cloud.living-iot.it"
+redis_port = 6379
+redis_db = 0
+redis_socket_keepalive = True
+redis_retry_on_timeout = True
+redis_health_check_interval = 1
 
 
 
