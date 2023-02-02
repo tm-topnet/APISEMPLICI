@@ -7,15 +7,6 @@ import logging
 import pickle
 import json
 
-logger = logging.getLogger(__name__)
-logfile = 'logs/service_'+str(datetime.now().date()).replace('-','')+'.log'
-logger.setLevel(logging.INFO)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')   
-handler = logging.FileHandler(logfile)
-handler.setLevel(logging.INFO)
-handler.setFormatter(formatter)
-logger.addHandler(handler)
-
 config_object = ConfigParser()
 config_object.read("fromWFtoJET-config.ini")
 redis_info = config_object["REDIS"]
@@ -67,7 +58,6 @@ class redisClient(object):
         self.redis_socket_keepalive = redis_socket_keepalive
         self.redis_retry_on_timeout = redis_retry_on_timeout
         self.redis_health_check_interval = redis_health_check_interval
-        logger.info("[Redis] Redis Client built")
     
     def connect(self, channel):
         """
@@ -83,7 +73,6 @@ class redisClient(object):
         self.r = redis.Redis(connection_pool=self.pool)
         self.ps = self.r.pubsub()
         self.ps.psubscribe(channel)
-        logger.info("[Redis] Connected and subscribed to {0}".format(channel))
 
     def get_message(self, channel_pattern, only_messages=True):
         """
@@ -112,7 +101,6 @@ class redisClient(object):
             else:
                 return None
         except ConnectionError:
-            logger.info("[Redis] Lost connection. Try to reconnect..")
             self.connect(channel_pattern)
             msg = self.ps.get_message()
             if msg:
@@ -141,7 +129,6 @@ class redisClient(object):
         try:
             self.r.publish(channel_out, data)
         except ConnectionError:
-            logger.info("[Redis] Lost connection. Try to reconnect..")
             self.connect(channel_in)
             self.r.publish(channel_out, data)
 
