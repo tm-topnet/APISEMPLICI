@@ -16,7 +16,7 @@ import uuid
 
 
 
-rdscli.connect('facedetected')
+rdscli.connect('_')
 
 # Initializing Flask App Service
 app = Flask("application")
@@ -46,7 +46,7 @@ class GetAuthSchema(Schema):
 class ProvaRispostaApi(MethodView):
 
     @blp_auth.arguments(GetAuthSchema)
-    @blp_auth.response(200,OutGetAuthSchema)
+    @blp_auth.response(200,GetAuthSchema)
     def post(self, input):
         """
         """
