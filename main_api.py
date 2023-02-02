@@ -46,7 +46,7 @@ class GetAuthSchema(Schema):
 class ProvaRispostaApi(MethodView):
 
     @blp_auth.arguments(GetAuthSchema)
-    #@blp_auth.response(200,OutGetAuthSchema)
+    @blp_auth.response(200,OutGetAuthSchema)
     def post(self, input):
         """
         """
