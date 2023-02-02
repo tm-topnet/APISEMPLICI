@@ -4,7 +4,7 @@ from rds.rdscli import rdscli
 from configparser import ConfigParser
 from datetime import datetime
 import json
-import numpy as np
+# import numpy as np
 import operator
 # import per liot
 from flask import Flask, request, jsonify
